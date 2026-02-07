@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiosity Tech - Innovate. Learn. Transform.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS for animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Glassmorphism effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #6D28D9 0%, #8B5CF6 50%, #1E3A8A 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #6D28D9, #8B5CF6);
+            border-radius: 10px;
+        }
+        
+        /* Section reveal animation */
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* 3D card hover effect */
+        .card-3d {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(109, 40, 217, 0.15);
+        }
+        
+        /* Button ripple effect */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple-effect:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .ripple-effect:focus:after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+        
+        /* Loader */
+        .loader {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(0deg, rgba(109, 40, 217, 0.2) 33%, #6D28D9 100%);
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        
+        .loader::after {
+            content: '';  
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        @keyframes rotation {
+            0% { transform: rotate(0deg) }
+            100% { transform: rotate(360deg) }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#EDE9FE] via-white to-[#E0F2FE] text-gray-800">
+    
+    <!-- Page Loader -->
+    <div id="page-loader" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="loader mb-6"></div>
+        <h2 class="text-xl font-semibold text-purple-700">Loading Curiosity Tech</h2>
+        <p class="text-gray-500 mt-2">Preparing an innovative learning experience...</p>
+    </div>
+    
+    <!-- Sticky Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between glass-effect rounded-2xl py-3 px-6 shadow-lg">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">Curiosity Tech</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 relative group">Home</a>
+                    <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a>
+                        <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
+                        <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
+                        <a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a>
+                        
+                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-4">
+                    <a href="/pages/contact.html" >Contact</a>
+                </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-xl rounded-b-2xl py-6 px-6 hidden transition-all duration-300 transform translate-y-2">
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 py-2 border-b border-gray-100">Home</a>
+                 <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a>
+                        <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
+                        <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
+                        <a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a>
+                        
+                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-4">
+                    <a href="/pages/contact.html" >Contact</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 overflow-hidden">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <!-- Hero Content -->
+                <div class="lg:w-1/2 mb-16 lg:mb-0 fade-in-up">
+                    <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                        <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                        <span class="text-sm font-medium text-purple-700">Innovate. Learn. Transform.</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        <span class="block">Master The Future Of</span>
+                        <span class="gradient-text">Technology & Innovation</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl">
+                        Curiosity Tech is where cutting-edge technology meets practical learning. Join our community of innovators and transform your career with hands-on courses, expert mentors, and real-world projects.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                        <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ripple-effect flex items-center justify-center">
+                            <span>Explore Courses</span>
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </button>
+                        
+                        <button class="glass-effect border border-purple-200 text-purple-700 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                            <i class="fas fa-play-circle mr-3"></i>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center space-x-8">
+                        <div>
+                            <p class="text-3xl font-bold text-purple-700">250+</p>
+                            <p class="text-gray-600">Courses</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-blue-700">50K+</p>
+                            <p class="text-gray-600">Students</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-indigo-700">98%</p>
+                            <p class="text-gray-600">Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual -->
+                <div class="lg:w-1/2 relative">
+                    <!-- Floating elements -->
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-r from-purple-400 to-blue-300 rounded-full opacity-20 float-animation"></div>
+                    <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-blue-400 to-purple-300 rounded-full opacity-20 float-animation" style="animation-delay: 2s;"></div>
+                    
+                    <!-- Main card -->
+                    <div class="relative glass-effect rounded-3xl p-8 shadow-2xl overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500 to-transparent opacity-20 rounded-full -translate-y-16 translate-x-16"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <!-- Course card 1 -->
+                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d">
+                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-blue-400 flex items-center justify-center mb-4">
+                                        <i class="fas fa-code text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-800 mb-2">Web Development</h3>
+                                    <p class="text-sm text-gray-600">Master modern full-stack development</p>
+                                </div>
+                                
+                                <!-- Course card 2 -->
+                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.2s;">
+                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center mb-4">
+                                        <i class="fas fa-robot text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-800 mb-2">AI & ML</h3>
+                                    <p class="text-sm text-gray-600">Build intelligent applications</p>
+                                </div>
+                                
+                                <!-- Course card 3 -->
+                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.4s;">
+                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-400 flex items-center justify-center mb-4">
+                                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-800 mb-2">Cyber Security</h3>
+                                    <p class="text-sm text-gray-600">Secure digital systems & networks</p>
+                                </div>
+                                
+                                <!-- Course card 4 -->
+                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.6s;">
+                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center mb-4">
+                                        <i class="fas fa-chart-line text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-800 mb-2">Data Science</h3>
+                                    <p class="text-sm text-gray-600">Analyze & visualize complex data</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Interactive element -->
+                            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border border-purple-100">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-800">Live Learning Session</h3>
+                                    <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-medium">
+                                        <i class="fas fa-circle mr-1 animate-pulse"></i> Live Now
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Join 500+ learners in our interactive session on "Future of Web3"</p>
+                                <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
+                                    <i class="fas fa-video mr-2"></i> Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-gradient-to-b from-white to-purple-50/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Why Choose Us</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Innovative Learning <span class="gradient-text">Experience</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">We combine cutting-edge technology with pedagogical excellence to deliver transformative learning experiences.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- About Image -->
+                <div class="relative reveal" style="animation-delay: 0.2s;">
+                    <div class="absolute -top-6 -left-6 w-64 h-64 bg-gradient-to-r from-purple-400 to-blue-300 rounded-full opacity-20"></div>
+                    <div class="relative glass-effect rounded-3xl p-2 shadow-2xl">
+                        <div class="bg-gradient-to-br from-purple-500 to-blue-400 rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Curiosity Tech Team" class="w-full h-auto opacity-90 mix-blend-overlay">
+                        </div>
+                    </div>
+                    
+                    <!-- Floating element -->
+                    <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-2xl w-64">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                                <i class="fas fa-trophy text-white text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-3xl font-bold text-purple-700">#1</p>
+                                <p class="text-sm text-gray-600">Rated Platform</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 text-sm">"Best EdTech Startup 2023" - Tech Innovation Awards</p>
+                    </div>
+                </div>
+                
+                <!-- About Content -->
+                <div class="reveal" style="animation-delay: 0.4s;">
+                    <h3 class="text-3xl font-bold mb-6">We're redefining <span class="gradient-text">tech education</span> for the modern world</h3>
+                    <p class="text-gray-600 mb-8">At Curiosity Tech, we believe that learning technology should be engaging, practical, and accessible to everyone. Our platform combines expert-led courses with hands-on projects and a supportive community.</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Feature 1 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <i class="fas fa-users text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg mb-2">Expert Mentors</h4>
+                                <p class="text-gray-600">Learn from industry professionals working at top tech companies.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 2 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <i class="fas fa-laptop-code text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg mb-2">Hands-on Projects</h4>
+                                <p class="text-gray-600">Build real-world applications and add them to your portfolio.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 3 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <i class="fas fa-bolt text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg mb-2">Flexible Learning</h4>
+                                <p class="text-gray-600">Learn at your own pace with lifetime access to course materials.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="mt-10 bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ripple-effect">
+                        Learn More About Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Our Courses</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Explore <span class="gradient-text">Popular Courses</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Hand-picked, industry-relevant courses designed to boost your career in technology.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course 1 -->
+                <div class="reveal card-3d bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-blue-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-code text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-purple-700 px-3 py-1 rounded-full text-sm font-medium">Bestseller</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-purple-100 to-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-laptop-code text-purple-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Development</span>
+                            </div>
+                            <div class="text-amber-500">
+                                <i class="fas fa-star"></i>
+                                <span class="font-bold ml-1">4.9</span>
+                                <span class="text-gray-400 text-sm">(2.4k)</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Full Stack Web Development</h3>
+                        <p class="text-gray-600 mb-6">Master modern web development with React, Node.js, and databases. Build complete web applications from scratch.</p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">12 Weeks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-signal text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-700">$149</div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                            Enroll Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="reveal card-3d bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.2s;">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-cyan-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Trending</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 flex items-center justify-center">
+                                    <i class="fas fa-brain text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">AI & ML</span>
+                            </div>
+                            <div class="text-amber-500">
+                                <i class="fas fa-star"></i>
+                                <span class="font-bold ml-1">4.8</span>
+                                <span class="text-gray-400 text-sm">(1.8k)</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Machine Learning Fundamentals</h3>
+                        <p class="text-gray-600 mb-6">Learn to build and deploy ML models using Python, TensorFlow, and real-world datasets. No prior experience required.</p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">16 Weeks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-signal text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-blue-700">$199</div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                            Enroll Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="reveal card-3d bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.4s;">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-teal-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-chart-bar text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-green-700 px-3 py-1 rounded-full text-sm font-medium">New</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
+                                    <i class="fas fa-database text-green-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Data Science</span>
+                            </div>
+                            <div class="text-amber-500">
+                                <i class="fas fa-star"></i>
+                                <span class="font-bold ml-1">4.7</span>
+                                <span class="text-gray-400 text-sm">(1.2k)</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Data Science & Analytics</h3>
+                        <p class="text-gray-600 mb-6">Master data analysis, visualization, and storytelling with Python, SQL, and Tableau. Turn data into insights.</p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">14 Weeks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-signal text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-green-700">$179</div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-green-600 to-teal-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                            Enroll Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 reveal" style="animation-delay: 0.6s;">
+                <button class="glass-effect border border-purple-200 text-purple-700 px-10 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                    <span>View All Courses</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blogs Section -->
+    <section id="blogs" class="py-20 px-4 bg-gradient-to-b from-white to-blue-50/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Latest Insights</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">From Our <span class="gradient-text">Blog</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Stay updated with the latest trends, tutorials, and insights in technology and learning.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Blog 1 -->
+                <div class="reveal bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group" style="animation-delay: 0.2s;">
+                    <div class="h-56 bg-gradient-to-r from-purple-500 to-blue-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-code-branch text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                            <span class="text-white text-sm font-medium">Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="far fa-calendar mr-2"></i>
+                            <span>March 15, 2023</span>
+                            <span class="mx-2">•</span>
+                            <i class="far fa-clock mr-2"></i>
+                            <span>8 min read</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-700 transition-colors duration-300">The Future of React in 2023</h3>
+                        <p class="text-gray-600 mb-6">Exploring new features, best practices, and emerging patterns in React development for modern applications.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-purple-100 to-blue-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-purple-600"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Alex Johnson</span>
+                            </div>
+                            <a href="#" class="text-purple-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                                Read More
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog 2 -->
+                <div class="reveal bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group" style="animation-delay: 0.4s;">
+                    <div class="h-56 bg-gradient-to-r from-blue-500 to-cyan-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                            <span class="text-white text-sm font-medium">AI & ML</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="far fa-calendar mr-2"></i>
+                            <span>April 2, 2023</span>
+                            <span class="mx-2">•</span>
+                            <i class="far fa-clock mr-2"></i>
+                            <span>12 min read</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors duration-300">GPT-4 and Beyond: What's Next?</h3>
+                        <p class="text-gray-600 mb-6">An in-depth look at the capabilities of GPT-4 and what future iterations of language models might bring to developers.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-blue-600"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Sarah Chen</span>
+                            </div>
+                            <a href="#" class="text-blue-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                                Read More
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog 3 -->
+                <div class="reveal bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group" style="animation-delay: 0.6s;">
+                    <div class="h-56 bg-gradient-to-r from-green-500 to-teal-400 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-7xl opacity-30"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                            <span class="text-white text-sm font-medium">Career</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="far fa-calendar mr-2"></i>
+                            <span>April 10, 2023</span>
+                            <span class="mx-2">•</span>
+                            <i class="far fa-clock mr-2"></i>
+                            <span>6 min read</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-700 transition-colors duration-300">Top Tech Skills for 2023</h3>
+                        <p class="text-gray-600 mb-6">Discover the most in-demand technology skills that will boost your career prospects in the coming year.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-green-600"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Michael Rodriguez</span>
+                            </div>
+                            <a href="#" class="text-green-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                                Read More
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 reveal" style="animation-delay: 0.8s;">
+                <button class="glass-effect border border-purple-200 text-purple-700 px-10 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                    <span>View All Articles</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Communities Section -->
+    <section id="communities" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Join Our Communities</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Connect With <span class="gradient-text">Fellow Learners</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Join our vibrant communities to collaborate, share knowledge, and grow together with tech enthusiasts worldwide.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Discord Community -->
+                <div class="reveal bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 text-white shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105" style="animation-delay: 0.2s;">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                            <i class="fab fa-discord text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">25K+</div>
+                            <div class="text-white/80">Members</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4">Discord Community</h3>
+                    <p class="text-white/90 mb-8">Join our active Discord server for real-time discussions, coding help, and community events.</p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Daily coding challenges</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Live Q&A sessions</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Project collaboration</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-white text-purple-700 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <i class="fab fa-discord mr-2"></i> Join Discord
+                    </button>
+                </div>
+                
+                <!-- Telegram Community -->
+                <div class="reveal bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl p-8 text-white shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                            <i class="fab fa-telegram text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">15K+</div>
+                            <div class="text-white/80">Members</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4">Telegram Groups</h3>
+                    <p class="text-white/90 mb-8">Join topic-specific Telegram groups for focused discussions, resource sharing, and networking.</p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Topic-specific channels</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Resource sharing</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Job opportunities</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-white text-blue-700 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <i class="fab fa-telegram mr-2"></i> Join Telegram
+                    </button>
+                </div>
+                
+                <!-- Forum Community -->
+                <div class="reveal bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl p-8 text-white shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105" style="animation-delay: 0.6s;">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                            <i class="fas fa-comments text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">10K+</div>
+                            <div class="text-white/80">Members</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4">Discussion Forums</h3>
+                    <p class="text-white/90 mb-8">Participate in our structured forums for in-depth discussions, project reviews, and mentorship.</p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Structured discussions</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Project feedback</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span>Mentorship programs</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-white text-green-700 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-comments mr-2"></i> Visit Forums
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gradient-to-b from-white to-purple-50/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Get In Touch</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's <span class="gradient-text">Connect</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Have questions or ready to start your learning journey? Reach out to us—we're here to help!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="reveal" style="animation-delay: 0.2s;">
+                    <div class="glass-effect rounded-3xl p-8 shadow-2xl">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Send us a message</h3>
+                        
+                        <form id="contact-form">
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2" for="name">Full Name</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-purple-500"></i>
+                                    </div>
+                                    <input type="text" id="name" class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300" placeholder="Enter your name">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2" for="email">Email Address</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-purple-500"></i>
+                                    </div>
+                                    <input type="email" id="email" class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300" placeholder="Enter your email">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2" for="subject">Subject</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="fas fa-tag text-purple-500"></i>
+                                    </div>
+                                    <input type="text" id="subject" class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300" placeholder="What is this regarding?">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <label class="block text-gray-700 font-medium mb-2" for="message">Message</label>
+                                <div class="relative">
+                                    <div class="absolute top-4 left-4 flex items-center pointer-events-none">
+                                        <i class="fas fa-comment-dots text-purple-500"></i>
+                                    </div>
+                                    <textarea id="message" rows="5" class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300 resize-none" placeholder="Your message..."></textarea>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ripple-effect">
+                                Send Message
+                                <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Info & Map -->
+                <div class="reveal" style="animation-delay: 0.4s;">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Contact Information</h3>
+                        <p class="text-gray-600 mb-8">Feel free to reach out to us through any of the following channels. We typically respond within 24 hours.</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Address -->
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-purple-600 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Visit Our Office</h4>
+                                    <p class="text-gray-600">123 Innovation Drive, Tech Park, San Francisco, CA 94107</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope-open-text text-blue-600 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email Us</h4>
+                                    <p class="text-gray-600">hello@curiositytech.in</p>
+                                    <p class="text-gray-600">support@curiositytech.in</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone -->
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-green-600 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Call Us</h4>
+                                    <p class="text-gray-600">+1 (555) 123-4567 (Sales)</p>
+                                    <p class="text-gray-600">+1 (555) 987-6543 (Support)</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Hours -->
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-clock text-indigo-600 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Business Hours</h4>
+                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM PST</p>
+                                    <p class="text-gray-600">Saturday: 10:00 AM - 4:00 PM PST</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="h-14 w-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="h-14 w-14 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="h-14 w-14 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="h-14 w-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter -->
+                    <div class="mt-12 glass-effect rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Subscribe to Our Newsletter</h3>
+                        <p class="text-gray-600 mb-6">Get the latest tech insights, course updates, and exclusive offers directly in your inbox.</p>
+                        
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300">
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-r-xl font-medium hover:shadow-lg transition-all duration-300">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-white to-gray-100 pt-16 pb-8 px-4 border-t border-gray-200">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                            <i class="fas fa-lightbulb text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">Curiosity Tech</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Empowering the next generation of tech innovators through cutting-edge education and community collaboration.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-100 hover:text-purple-600 transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-100 hover:text-pink-600 transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a></li>
+                        <li><a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a></li>
+                        <li><a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a></li>
+                        <li><a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a></li>
+                        <li><a href="/pages/contact.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Documentation</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Community</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Support Center</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Partners</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-600 mt-1 mr-3"></i>
+                            <span class="text-gray-600">123 Innovation Drive, Tech Park, San Francisco, CA 94107</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-purple-600 mr-3"></i>
+                            <span class="text-gray-600">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-purple-600 mr-3"></i>
+                            <span class="text-gray-600">hello@curiositytech.in</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4">Inspirational Quote</h4>
+                        <div class="glass-effect rounded-xl p-4 border border-purple-100">
+                            <p class="text-gray-700 italic">"The only way to learn a new programming language is by writing programs in it."</p>
+                            <p class="text-right text-purple-600 font-medium mt-2">- Dennis Ritchie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-300">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-600">© 2023 Curiosity Tech. All rights reserved.</p>
+                    </div>
+                    
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Terms & Conditions</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Cookie Policy</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Sitemap</a>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <p class="text-gray-500 text-sm">Designed with <i class="fas fa-heart text-red-500 mx-1"></i> by the Curiosity Tech Team</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 h-12 w-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 z-30">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('translate-y-0');
+            
+            // Change icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('translate-y-0');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-md', 'py-3');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-md', 'py-3');
+                navbar.classList.add('py-4');
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('hidden');
+                backToTopBtn.classList.add('flex');
+            } else {
+                backToTopBtn.classList.remove('flex');
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Section reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 150;
+            
+            revealElements.forEach(element => {
+                const revealTop = element.getBoundingClientRect().top;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // Form submission (demo)
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Show success message
+            alert(`Thank you ${name}! We've received your message and will contact you at ${email} soon.`);
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Ripple effect for buttons
+        document.querySelectorAll('.ripple-effect').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Remove any existing ripple
+                const existingRipple = this.querySelector('.ripple');
+                if (existingRipple) {
+                    existingRipple.remove();
+                }
+                
+                // Create ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
