@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities - Curiosity Tech</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS for animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        
+        /* Glassmorphism effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #6D28D9 0%, #8B5CF6 50%, #1E3A8A 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #6D28D9, #8B5CF6);
+            border-radius: 10px;
+        }
+        
+        /* Section reveal animation */
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* 3D card hover effect */
+        .card-3d {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(109, 40, 217, 0.15);
+        }
+        
+        /* Specialized communities card hover effect */
+        .specialized-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .specialized-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Button ripple effect */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple-effect:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .ripple-effect:focus:after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+        
+        /* Card shine effect */
+        .card-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            opacity: 0;
+            transform: rotate(30deg);
+            background: rgba(255, 255, 255, 0.13);
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.13) 0%,
+                rgba(255, 255, 255, 0.13) 77%,
+                rgba(255, 255, 255, 0.5) 92%,
+                rgba(255, 255, 255, 0.0) 100%
+            );
+        }
+        
+        .card-shine:hover::after {
+            opacity: 1;
+            left: 130%;
+            transition-property: left, top, opacity;
+            transition-duration: 0.7s, 0.7s, 0.15s;
+            transition-timing-function: ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#EDE9FE] via-white to-[#E0F2FE] text-gray-800">
+    
+    <!-- Page Loader -->
+    <div id="page-loader" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <!-- <div class="loader mb-6">
+            <div class="h-16 w-16 rounded-full border-4 border-t-purple-600 border-r-blue-500 border-b-purple-600 border-l-transparent animate-spin"></div>
+        </div> -->
+        <div class="loader mb-6 relative h-16 w-16">
+        <div class="absolute inset-0 rounded-full border-4 border-t-purple-600 border-b-blue-500 border-l-transparent border-r-transparent animate-spin"></div>
+        <div class="absolute inset-2 rounded-full border-4 border-r-purple-400 border-l-blue-300 border-t-transparent border-b-transparent animate-[spin_1s_linear_infinite_reverse]"></div>
+        </div>
+        <h2 class="text-xl font-semibold text-purple-700">Loading Communities</h2>
+        <p class="text-gray-500 mt-2">Connecting you to amazing tech communities...</p>
+    </div>
+    
+    <!-- Sticky Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between glass-effect rounded-2xl py-3 px-6 shadow-lg">
+                <!-- Logo -->
+                <!-- <a href="/home.html" class="flex items-center space-x-2">
+                    <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">Curiosity Tech</span>
+                </a> -->
+                <a href="../home.html" class="flex items-center space-x-2">
+                <img 
+                    src="../assets/logo.png" 
+                    alt="Curiosity Tech"
+                    class="h-10 w-30">
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../home.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Home</a>
+                    <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a>
+                    <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
+                    <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
+                    <a href="/pages/communities.html" class="font-medium text-purple-700 transition-colors duration-300 relative group">
+                        Communities
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-600 transform scale-x-100 transition-transform duration-300"></span>
+                    </a>
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                        <a href="/pages/contact.html">Contact</a>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-xl rounded-b-2xl py-6 px-6 hidden transition-all duration-300 transform translate-y-2">
+            <div class="flex flex-col space-y-6">
+                <a href="../home.html" class="font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 py-2 border-b border-gray-100">Home</a>
+                <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300 py-2 border-b border-gray-100">About Us</a>
+                <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300 py-2 border-b border-gray-100">All Courses</a>
+                <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300 py-2 border-b border-gray-100">Blog</a>
+                <a href="/pages/communities.html" class="font-medium text-purple-700 transition-colors duration-300 py-2 border-b border-purple-100">Communities</a>
+                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-4">
+                    <a href="/pages/contact.html">Contact</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section for Communities -->
+    <section id="hero" class="pt-32 pb-16 md:pt-40 md:pb-24 px-4 overflow-hidden relative">
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-gradient-to-r from-purple-400 to-blue-300 rounded-full opacity-20 float-animation"></div>
+        <div class="absolute -bottom-10 -left-10 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-300 rounded-full opacity-20 float-animation" style="animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center fade-in-up">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Join Our Communities</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    <span class="block">Connect With</span>
+                    <span class="gradient-text">Tech Innovators</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
+                    Join our vibrant communities where learners, mentors, and tech enthusiasts collaborate, share knowledge, and grow together. Be part of something bigger than just a course.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="https://www.linkedin.com/company/curiosity-tech/" target="_blank" rel="noopener noreferrer">
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ripple-effect flex items-center justify-center">
+                    <span>Join LinkedIn</span>
+                    <i class="fab fa-linkedin ml-3"></i>
+                    </button>
+                    </a>
+                    
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <button class="glass-effect border border-purple-200 text-purple-700 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Explore All Communities</span>
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Communities Section -->
+    <section id="communities-main" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Our <span class="gradient-text">Communities</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Each community is tailored to specific interests and skill levels, ensuring you find the perfect group to accelerate your learning journey.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- LinkedIn Community -->
+                <div class="reveal card-3d card-shine bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                    <div class="h-48 bg-gradient-to-r from-blue-700 to-blue-500 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fab fa-linkedin text-white text-8xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Most Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-blue-100 flex items-center justify-center">
+                                    <i class="fab fa-linkedin text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">LinkedIn</span>
+                            </div>
+                            <div class="text-white bg-gradient-to-r from-blue-700 to-blue-500 px-3 py-1 rounded-full text-sm font-bold">
+                                25K+ Members
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Curiosity Tech LinkedIn</h3>
+                        <p class="text-gray-600 mb-6">Join our professional LinkedIn community for industry insights, career opportunities, networking with professionals, and expert discussions.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Industry insights and trends</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Job and career opportunities</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Professional networking</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Expert Q&A sessions</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://www.linkedin.com/company/curiosity-tech/" target="_blank" rel="noopener noreferrer" class="w-full block">
+                        <button class="w-full bg-gradient-to-r from-blue-700 to-blue-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                        <i class="fab fa-linkedin mr-2"></i> Join LinkedIn Community
+                        </button>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Instagram Community -->
+                <div class="reveal card-3d card-shine bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.2s;">
+                    <div class="h-48 bg-gradient-to-r from-pink-600 to-purple-600 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fab fa-instagram text-white text-8xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-pink-700 px-3 py-1 rounded-full text-sm font-medium">Visual Updates</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-pink-100 to-purple-100 flex items-center justify-center">
+                                    <i class="fab fa-instagram text-pink-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Instagram</span>
+                            </div>
+                            <div class="text-white bg-gradient-to-r from-pink-600 to-purple-600 px-3 py-1 rounded-full text-sm font-bold">
+                                15K+ Members
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Curiosity Tech Instagram</h3>
+                        <p class="text-gray-600 mb-6">Follow us on Instagram for visual tech content, quick tips, behind-the-scenes, reels, stories, and interactive polls.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Visual tech tips and tricks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Behind-the-scenes content</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Interactive stories and polls</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Quick updates and announcements</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://www.instagram.com/curiositytechpark" target="_blank" rel="noopener noreferrer" class="w-full block">
+                        <button class="w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                            <i class="fab fa-instagram mr-2"></i> Follow on Instagram
+                        </button>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Forum Community -->
+                <div class="reveal card-3d card-shine bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.4s;">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-teal-500 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-comments text-white text-8xl opacity-30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white/90 backdrop-blur-sm text-green-700 px-3 py-1 rounded-full text-sm font-medium">In-Depth</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
+                                    <i class="fas fa-comments text-green-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Forum</span>
+                            </div>
+                            <div class="text-white bg-gradient-to-r from-green-500 to-teal-500 px-3 py-1 rounded-full text-sm font-bold">
+                                10K+ Members
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Discussion Forums</h3>
+                        <p class="text-gray-600 mb-6">Participate in our structured forums for in-depth discussions, detailed project reviews, mentorship, and long-form knowledge sharing.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Structured, topic-based discussions</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Detailed project feedback and reviews</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Mentorship programs</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Knowledge base and tutorials</span>
+                            </div>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        <button class="w-full bg-gradient-to-r from-green-600 to-teal-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                            <i class="fas fa-comments mr-2"></i> Visit Discussion Forums
+                        </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Specialized Communities Section -->
+    <section id="specialized-communities" class="py-16 px-4 bg-gradient-to-b from-white to-purple-50/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Specialized Groups</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Topic-Specific <span class="gradient-text">Communities</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Dive deeper into specific technologies and domains with our specialized community groups.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Web Dev Community -->
+                <div class="reveal specialized-card card-shine bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.1s;">
+                    <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-5 pulse-animation">
+                        <i class="fas fa-code text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Web Development</h3>
+                    <p class="text-gray-600 mb-6">Frontend, backend, and full-stack development discussions, project collaborations, and code reviews.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">4.2K members</span>
+                        <a href="#" class="text-purple-600 font-medium hover:text-purple-800 transition-colors duration-300 slide-in">Join →</a>
+                    </div>
+                </div>
+                
+                <!-- AI/ML Community -->
+                <div class="reveal specialized-card card-shine bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.2s;">
+                    <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-5 pulse-animation">
+                        <i class="fas fa-robot text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">AI & Machine Learning</h3>
+                    <p class="text-gray-600 mb-6">ML models, AI applications, research papers, datasets, and implementation discussions.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">3.8K members</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition-colors duration-300 slide-in">Join →</a>
+                    </div>
+                </div>
+                
+                <!-- Data Science Community -->
+                <div class="reveal specialized-card card-shine bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.3s;">
+                    <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mb-5 pulse-animation">
+                        <i class="fas fa-chart-bar text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Data Science</h3>
+                    <p class="text-gray-600 mb-6">Data analysis, visualization, statistics, and data engineering discussions and collaborations.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">2.9K members</span>
+                        <a href="#" class="text-green-600 font-medium hover:text-green-800 transition-colors duration-300 slide-in">Join →</a>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity Community -->
+                <div class="reveal specialized-card card-shine bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100" style="animation-delay: 0.4s;">
+                    <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center mb-5 pulse-animation">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Cybersecurity</h3>
+                    <p class="text-gray-600 mb-6">Security practices, ethical hacking, vulnerability analysis, and defense strategies.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">2.1K members</span>
+                        <a href="#" class="text-red-600 font-medium hover:text-red-800 transition-colors duration-300 slide-in">Join →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 reveal" style="animation-delay: 0.5s;">
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                <button class="glass-effect border border-purple-200 text-purple-700 px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 pulse-animation">
+                    <span>Explore All Specialized Groups</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Community Events Section -->
+    <section id="community-events" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-purple-600"></span>
+                    <span class="text-sm font-medium text-purple-700">Upcoming Events</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Community <span class="gradient-text">Events & Activities</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Join our regular community events designed to enhance learning, networking, and collaboration.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Upcoming Events -->
+                <div class="reveal" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Upcoming Events</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Event 1 -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-2">Live Workshop</span>
+                                    <h4 class="text-xl font-bold text-gray-800">Web3 Fundamentals & Solidity Basics</h4>
+                                </div>
+                                <div class="mt-3 md:mt-0 text-right">
+                                    <div class="text-2xl font-bold text-purple-700">Apr 28</div>
+                                    <div class="text-gray-600">7:00 PM IST</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">Learn the basics of Web3, blockchain, and smart contract development with Solidity in this hands-on workshop.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-user-friends mr-2"></i>
+                                    <span>450+ attendees</span>
+                                </div>
+                                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-5 py-2 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 2 -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-2">AMA Session</span>
+                                    <h4 class="text-xl font-bold text-gray-800">Ask Me Anything: Senior ML Engineer at Google</h4>
+                                </div>
+                                <div class="mt-3 md:mt-0 text-right">
+                                    <div class="text-2xl font-bold text-blue-700">May 2</div>
+                                    <div class="text-gray-600">8:00 PM IST</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">Interactive session with a Senior ML Engineer at Google. Ask questions about career growth, ML trends, and industry insights.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-user-friends mr-2"></i>
+                                    <span>320+ attendees</span>
+                                </div>
+                                <button class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-5 py-2 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 3 -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-2">Hackathon</span>
+                                    <h4 class="text-xl font-bold text-gray-800">24-Hour Sustainability Hackathon</h4>
+                                </div>
+                                <div class="mt-3 md:mt-0 text-right">
+                                    <div class="text-2xl font-bold text-green-700">May 10-11</div>
+                                    <div class="text-gray-600">Starts 9:00 AM</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">Build solutions for sustainability challenges in this 24-hour hackathon with prizes worth ₹5,000.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-user-friends mr-2"></i>
+                                    <span>180+ teams</span>
+                                </div>
+                                <button class="bg-gradient-to-r from-green-600 to-teal-500 text-white px-5 py-2 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Community Benefits -->
+                <div class="reveal" style="animation-delay: 0.4s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Why Join Our Communities?</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="glass-effect rounded-2xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-hands-helping text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Collaborative Learning</h4>
+                                    <p class="text-gray-600">Learn faster by collaborating on projects, sharing knowledge, and solving problems together with peers and mentors.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-2xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-network-wired text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Networking Opportunities</h4>
+                                    <p class="text-gray-600">Connect with industry professionals, mentors, and like-minded learners to expand your professional network.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-2xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-briefcase text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Career Growth</h4>
+                                    <p class="text-gray-600">Access job opportunities, internship postings, and career advice from professionals in the tech industry.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-2xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-lightbulb text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Stay Updated</h4>
+                                    <p class="text-gray-600">Get the latest news, trends, and insights in technology before anyone else through our community channels.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl border border-purple-100">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Community Guidelines</h4>
+                        <p class="text-gray-600 mb-4">Our communities thrive on respect, inclusivity, and mutual support. Please read our community guidelines before joining.</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        <button class="glass-effect border border-purple-200 text-purple-700 px-5 py-2 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
+                            Read Guidelines
+                        </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-purple-600 to-blue-500">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto text-center text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Join Our Communities?</h2>
+                <p class="text-xl mb-10 opacity-90">Join thousands of learners, mentors, and tech enthusiasts in our vibrant communities. Accelerate your learning journey today.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="https://www.linkedin.com/company/curiosity-tech/" target="_blank" rel="noopener noreferrer">
+                    <button class="bg-white text-purple-700 px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ripple-effect flex items-center justify-center">
+                        <i class="fab fa-linkedin mr-3"></i>
+                        <span>Join LinkedIn Community</span>
+                    </button>
+                    </a>
+                    
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <button class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-envelope mr-3"></i>
+                        <span>Get Community Updates</span>
+                    </button>
+                    </a>
+                </div>
+                
+                <p class="mt-8 text-white/80 text-sm">By joining, you agree to our <a href="#" class="underline font-medium">Community Guidelines</a> and <a href="#" class="underline font-medium">Privacy Policy</a>.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-white to-gray-100 pt-16 pb-8 px-4 border-t border-gray-200">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <!-- <div class="flex items-center space-x-2 mb-6">
+                        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                            <i class="fas fa-lightbulb text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">Curiosity Tech</span>
+                    </div> -->
+                    <a href="../home.html" class="flex items-center space-x-2">
+                    <img 
+                        src="../assets/logo.png" 
+                        alt="Curiosity Tech"
+                        class="h-20 w-35">
+                    </a>
+                    <p class="text-gray-600 mb-6">Empowering the next generation of tech innovators through cutting-edge education and community collaboration.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/people/Curiosity-Tech/100095248902197/" target="_blank" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <!-- <a href="#" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-400 transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a> -->
+                        <a href="https://www.instagram.com/curiositytechpark" target="_blank" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-100 hover:text-pink-600 transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/curiosity-tech/" target="_blank" class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="../home.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a></li>
+                        <li><a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a></li>
+                        <li><a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a></li>
+                        <li><a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a></li>
+                        <li><a href="/pages/contact.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Community Guidelines</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Event Calendar</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">FAQ</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Support Center</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Partners</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-600 mt-1 mr-3"></i>
+                            <span class="text-gray-600">1st Floor, Plot No 81, Wardha Rd, Gajanan Nagar, Nagpur</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-purple-600 transform -scale-x-100"></i>
+                            <span class="text-gray-600 mr-3"> +91-9860555369</span>
+                            
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-purple-600 mr-3"></i>
+                            <span class="text-gray-600">contact@curiositytech.in</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4">Community Quote</h4>
+                        <div class="glass-effect rounded-xl p-4 border border-purple-100">
+                            <p class="text-gray-700 italic">"Alone we can do so little; together we can do so much."</p>
+                            <p class="text-right text-purple-600 font-medium mt-2">- Helen Keller</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-300">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-600">© 2026 Curiosity Tech. All rights reserved.</p>
+                    </div>
+                    
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Terms & Conditions</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Cookie Policy</a>
+                        <a href="#" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Sitemap</a>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <p class="text-gray-500 text-sm">Designed  by the Curiosity Tech Team</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 h-12 w-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 z-30 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Change icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-md', 'py-3');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-md', 'py-3');
+                navbar.classList.add('py-4');
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Section reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 150;
+            
+            revealElements.forEach(element => {
+                const revealTop = element.getBoundingClientRect().top;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+            // Specific logic for community join buttons with # href
+            function setup404Redirects() {
+            // Find all buttons that might have # links
+            const joinButtons = document.querySelectorAll('button, a');
+            
+            joinButtons.forEach(element => {
+                // Check if it's a button inside an anchor with href="#"
+                if (element.tagName === 'BUTTON') {
+                    const parentAnchor = element.closest('a[href="#"]');
+                    if (parentAnchor) {
+                        element.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.href = '../404.html';
+                        });
+                    }
+                }
+                
+                // Check if it's an anchor with href="#"
+                if (element.tagName === 'A' && element.getAttribute('href') === '#') {
+                    element.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = '../404.html';
+                    });
+                }
+            });
+            
+            // Also handle any dynamically added buttons
+            const observer = new MutationObserver(setup404Redirects);
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+        // Initialize the 404 redirect logic
+        setup404Redirects();
+
+        // Ripple effect for buttons
+        document.querySelectorAll('.ripple-effect').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Remove any existing ripple
+                const existingRipple = this.querySelector('.ripple');
+                if (existingRipple) {
+                    existingRipple.remove();
+                }
+                
+                // Create ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Event registration buttons
+        document.querySelectorAll('button:contains("Register Now")').forEach(button => {
+            button.addEventListener('click', function() {
+                const eventTitle = this.closest('.bg-white').querySelector('h4').textContent;
+                alert(`You've successfully registered for: "${eventTitle}". We'll send you the joining details via email.`);
+            });
+        });
+        
+        // Community join buttons
+        document.querySelectorAll('button:contains("Join LinkedIn"), button:contains("Follow on Instagram"), button:contains("Visit Forums")').forEach(button => {
+            button.addEventListener('click', function() {
+                const communityName = this.textContent.replace('Join ', '').replace(' Community', '').replace(' Follow on ', '').replace(' Visit ', '');
+                
+                // Redirect to actual social media links
+                if (communityName.includes('LinkedIn')) {
+                    window.open('https://www.linkedin.com/company/curiosity-tech/', '_blank');
+                } else if (communityName.includes('Instagram')) {
+                    window.open('https://www.instagram.com/curiositytechpark', '_blank');
+                } else {
+                    alert(`Redirecting you to our ${communityName} community...`);
+                }
+            });
+        });
+        
+        // Social media links in footer
+        document.querySelectorAll('footer a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Links already have target="_blank" so they'll open in new tab
+                // We can add any additional behavior here if needed
+            });
+        });
+    </script>
+</body>
+</html>

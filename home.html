@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,26 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
+
+         @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3)); }
+            50% { filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6)); }
+        }
+
+        .animate-float-glow {
+            animation: float 6s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Gradient background for a premium feel */
+        body {
+            background: radial-gradient(circle at top left, #fdfbff 0%, #f3f0ff 100%);
+            overflow-x: hidden;
+        }
         * {
             font-family: 'Inter', sans-serif;
         }
@@ -207,15 +228,16 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 relative group">Home</a>
+                    <a href="../home.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Home</a>
                     <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a>
-                        <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
-                        <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
-                        <a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a>
-                        
-                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-4">
-                    <a href="/pages/contact.html" >Contact</a>
-                </button>
+                    <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
+                    <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
+                    <a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">
+                        Communities
+                    </a>
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                        <a href="/pages/contact.html">Contact</a>
+                    </button>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -224,7 +246,6 @@
                 </button>
             </div>
         </div>
-        
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-xl rounded-b-2xl py-6 px-6 hidden transition-all duration-300 transform translate-y-2">
             <div class="flex flex-col space-y-6">
@@ -232,10 +253,11 @@
                  <a href="/pages/about.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">About Us</a>
                         <a href="/pages/courses.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">All Courses</a>
                         <a href="/pages/blogs.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Blog</a>
-                        <a href="/pages/communities.html" class="text-gray-600 hover:text-purple-700 transition-colors duration-300">Communities</a>
+                        <a href="./pages/communities.html" class="">Communities</a>
                         
-                <button class="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 mt-4">
-                    <a href="/pages/contact.html" >Contact</a>
+               <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
@@ -244,6 +266,7 @@
     <!-- Hero Section -->
     <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 overflow-hidden">
         <div class="container mx-auto">
+            
             <div class="flex flex-col lg:flex-row items-center justify-between">
                 <!-- Hero Content -->
                 <div class="lg:w-1/2 mb-16 lg:mb-0 fade-in-up">
@@ -273,6 +296,7 @@
                         </button>
                     </div>
                     
+                    
                     <div class="mt-12 flex items-center space-x-8">
                         <div>
                             <p class="text-3xl font-bold text-purple-700">250+</p>
@@ -287,72 +311,39 @@
                             <p class="text-gray-600">Satisfaction</p>
                         </div>
                     </div>
+                    
                 </div>
                 
                 <!-- Hero Visual -->
-                <div class="lg:w-1/2 relative">
+ 
                     <!-- Floating elements -->
                     <div class="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-r from-purple-400 to-blue-300 rounded-full opacity-20 float-animation"></div>
                     <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-blue-400 to-purple-300 rounded-full opacity-20 float-animation" style="animation-delay: 2s;"></div>
                     
-                    <!-- Main card -->
-                    <div class="relative glass-effect rounded-3xl p-8 shadow-2xl overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500 to-transparent opacity-20 rounded-full -translate-y-16 translate-x-16"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="grid grid-cols-2 gap-6 mb-8">
-                                <!-- Course card 1 -->
-                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d">
-                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-blue-400 flex items-center justify-center mb-4">
-                                        <i class="fas fa-code text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-bold text-gray-800 mb-2">Web Development</h3>
-                                    <p class="text-sm text-gray-600">Master modern full-stack development</p>
-                                </div>
+                   
+                               
+                                 <!-- Image Container (Right Aligned Center) -->
+        <div class="w-full md:w-1/2 flex justify-center md:justify-end mt-12 md:mt-0 relative">
+            <!-- Decorative background blob -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-purple-300 rounded-full blur-[100px] opacity-30"></div>
+            
+            <div class="relative z-20 animate-float-glow">
+                <img 
+                    src="assets/photo1.png" 
+                    alt="Technology and Innovation Illustration" 
+                    class="w-full max-w-[500px] h-auto rounded-3xl object-contain"
+                    onerror="this.src='https://via.placeholder.com/500x500/f3f0ff/6366f1?text=Save+photo.png+in+assets/'"
+                >
+            </div>
+        </div>
+
+    </div>
+
+   
                                 
-                                <!-- Course card 2 -->
-                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.2s;">
-                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center mb-4">
-                                        <i class="fas fa-robot text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-bold text-gray-800 mb-2">AI & ML</h3>
-                                    <p class="text-sm text-gray-600">Build intelligent applications</p>
-                                </div>
-                                
-                                <!-- Course card 3 -->
-                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.4s;">
-                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-400 flex items-center justify-center mb-4">
-                                        <i class="fas fa-shield-alt text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-bold text-gray-800 mb-2">Cyber Security</h3>
-                                    <p class="text-sm text-gray-600">Secure digital systems & networks</p>
-                                </div>
-                                
-                                <!-- Course card 4 -->
-                                <div class="bg-white rounded-2xl p-5 shadow-lg card-3d" style="animation-delay: 0.6s;">
-                                    <div class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center mb-4">
-                                        <i class="fas fa-chart-line text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-bold text-gray-800 mb-2">Data Science</h3>
-                                    <p class="text-sm text-gray-600">Analyze & visualize complex data</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Interactive element -->
-                            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border border-purple-100">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-bold text-gray-800">Live Learning Session</h3>
-                                    <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-medium">
-                                        <i class="fas fa-circle mr-1 animate-pulse"></i> Live Now
-                                    </span>
-                                </div>
-                                <p class="text-gray-600 mb-4">Join 500+ learners in our interactive session on "Future of Web3"</p>
-                                <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300">
-                                    <i class="fas fa-video mr-2"></i> Join Now
-                                </button>
+                              
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -375,7 +366,7 @@
                 <div class="relative reveal" style="animation-delay: 0.2s;">
                     <div class="absolute -top-6 -left-6 w-64 h-64 bg-gradient-to-r from-purple-400 to-blue-300 rounded-full opacity-20"></div>
                     <div class="relative glass-effect rounded-3xl p-2 shadow-2xl">
-                        <div class="bg-gradient-to-br from-purple-500 to-blue-400 rounded-2xl overflow-hidden">
+                        <div class="bg-gradient-to-br from-blue-500 to-pink-400 rounded-2xl overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Curiosity Tech Team" class="w-full h-auto opacity-90 mix-blend-overlay">
                         </div>
                     </div>
@@ -391,14 +382,13 @@
                                 <p class="text-sm text-gray-600">Rated Platform</p>
                             </div>
                         </div>
-                        <p class="text-gray-700 text-sm">"Best EdTech Startup 2023" - Tech Innovation Awards</p>
+                        <p class="text-gray-700 text-sm">"Best EdTech Startup 2026" - Tech Innovation Awards</p>
                     </div>
                 </div>
                 
                 <!-- About Content -->
                 <div class="reveal" style="animation-delay: 0.4s;">
                     <h3 class="text-3xl font-bold mb-6">We're redefining <span class="gradient-text">tech education</span> for the modern world</h3>
-                    <p class="text-gray-600 mb-8">At Curiosity Tech, we believe that learning technology should be engaging, practical, and accessible to everyone. Our platform combines expert-led courses with hands-on projects and a supportive community.</p>
                     
                     <div class="space-y-6">
                         <!-- Feature 1 -->
@@ -449,7 +439,7 @@
             <div class="text-center mb-16 reveal">
                 <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
                     <span class="h-2 w-2 rounded-full bg-purple-600"></span>
-                    <span class="text-sm font-medium text-purple-700">Our Courses</span>
+                    <span class="text-sm font-medium text-purple-700 ">Our Courses</span>
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">Explore <span class="gradient-text">Popular Courses</span></h2>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">Hand-picked, industry-relevant courses designed to boost your career in technology.</p>
@@ -463,7 +453,7 @@
                             <i class="fas fa-code text-white text-7xl opacity-30"></i>
                         </div>
                         <div class="absolute top-4 right-4">
-                            <span class="bg-white/90 backdrop-blur-sm text-purple-700 px-3 py-1 rounded-full text-sm font-medium">Bestseller</span>
+                            <span class="bg-amber-100/90 backdrop-blur-sm text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Bestseller</span>
                         </div>
                     </div>
                     
@@ -475,11 +465,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-600">Development</span>
                             </div>
-                            <div class="text-amber-500">
-                                <i class="fas fa-star"></i>
-                                <span class="font-bold ml-1">4.9</span>
-                                <span class="text-gray-400 text-sm">(2.4k)</span>
-                            </div>
+                          
                         </div>
                         
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Full Stack Web Development</h3>
@@ -496,10 +482,11 @@
                                     <span class="text-sm text-gray-600">Advanced</span>
                                 </div>
                             </div>
-                            <div class="text-2xl font-bold text-purple-700">$149</div>
+                           
                         </div>
-                        
+                      
                         <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
+                           
                             Enroll Now
                         </button>
                     </div>
@@ -524,11 +511,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-600">AI & ML</span>
                             </div>
-                            <div class="text-amber-500">
-                                <i class="fas fa-star"></i>
-                                <span class="font-bold ml-1">4.8</span>
-                                <span class="text-gray-400 text-sm">(1.8k)</span>
-                            </div>
+
                         </div>
                         
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Machine Learning Fundamentals</h3>
@@ -541,11 +524,11 @@
                                     <span class="text-sm text-gray-600">16 Weeks</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <i class="fas fa-signal text-gray-400 mr-2"></i>
+                                   <i class="fas fa-chart-simple text-gray-400 mr-2"></i>
                                     <span class="text-sm text-gray-600">Intermediate</span>
                                 </div>
                             </div>
-                            <div class="text-2xl font-bold text-blue-700">$199</div>
+                            
                         </div>
                         
                         <button class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
@@ -573,11 +556,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-600">Data Science</span>
                             </div>
-                            <div class="text-amber-500">
-                                <i class="fas fa-star"></i>
-                                <span class="font-bold ml-1">4.7</span>
-                                <span class="text-gray-400 text-sm">(1.2k)</span>
-                            </div>
+                            
                         </div>
                         
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Data Science & Analytics</h3>
@@ -590,11 +569,11 @@
                                     <span class="text-sm text-gray-600">14 Weeks</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <i class="fas fa-signal text-gray-400 mr-2"></i>
+<i class="fas fa-chart-simple text-gray-400 mr-2"></i>
                                     <span class="text-sm text-gray-600">Intermediate</span>
                                 </div>
                             </div>
-                            <div class="text-2xl font-bold text-green-700">$179</div>
+                           
                         </div>
                         
                         <button class="w-full bg-gradient-to-r from-green-600 to-teal-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 ripple-effect">
